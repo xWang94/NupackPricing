@@ -26,8 +26,34 @@ package nupackpricing;
 
 public class NupackPricing {
 
+    /*
+     * Given the parameters, compute the total price. 
+     */
+     
     public double computePrice(double basePrice, int numberOfPeople, String material) {
-       
+        
+        // Markup rates for specific situations.
+        double totalPrice;
+        double flatMarkup = 0.05;
+        double peopleMarkup = (numberOfPeople * 0.012);
+        double pharmaceuticalMarkup = 0.075;
+        double foodMarkup = 0.13;
+        double electronicsMarkup = 0.02;
+        
+        // Calculation for types of materials that have different markup rate.
+        if (material.equals("drugs")) {
+            totalPrice = (basePrice * (1 + flatMarkup)) * (1 + peopleMarkup + pharmaceuticalMarkup);
+        }
+        else if (material.equals("food")) {
+            totalPrice = (basePrice * (1 + flatMarkup)) * (1 + peopleMarkup + foodMarkup);
+        }
+        else if (material.equals("electronics")) {
+            totalPrice = (basePrice * (1 + flatMarkup)) * (1 + peopleMarkup + electronicsMarkup);
+        }
+        else {
+            totalPrice = (basePrice * (1 + flatMarkup)) * (1 + peopleMarkup);
+        }        
+       return totalPrice;          
     }
 
 }
